@@ -6,20 +6,6 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { Strategy } = require('passport-jwt');
 
-function createToken (body) {
-    return jwt.sign(
-        body,
-        config.jwtKey.secretOrKey,
-        {expiresIn: config.expiresIn}
-    );
-}
-
-passport.use(new Strategy(config.jwtKey, function(jwt_payload, done) {
-    if(jwt_payload != void(0)) return done(false, jwt_payload);
-    done();
-}));
-
-
 
 
 async function listTodo(ctx, next){
@@ -73,14 +59,13 @@ async function updateTodo(ctx, next){
 async function checkLogin(ctx, next){
     passport.authenticate('jwt', { session: false }, (err, decryptToken, jwtError) => {
         if(jwtError != void(0) || err != void(0)) {
-            ctx.request.body = {auth: false};
+            ctx.body = {auth: false};
         }else{
-            ctx.request.body = {auth: true };
+            ctx.body = {auth: true };
         };
-        ctx.request.user = decryptToken;
+        ctx.user = decryptToken;
         
-    })(ctx);
-    console.log(ctx.cookies.get());
+    })(ctx, next);
     await next();
 }
 
@@ -95,7 +80,7 @@ async function login(ctx, next){
             const token = createToken({id: user._id, username: user.username});
             
             ctx.cookies.set('token', token, {
-                httpOnly: false
+                httpOnly: true
             });
 
             console.log(ctx.cookies.get());
@@ -118,8 +103,10 @@ async function register(ctx, next){
     try{
         let user = await db.findUser(ctx.request.body);
         if(user != void(0)) {
-            ctx.status = 400;
-            ctx.message = "User already exist.";
+            
+            return { status: ctx.status = 400,
+                    message:  ctx.message = "User already exist."
+            };
         }
 
         user = await db.createUser(ctx.request.body);
@@ -127,10 +114,10 @@ async function register(ctx, next){
         const token = createToken({id: user._id, username: user.username});
 
         ctx.cookies.set('token', token, {
-            httpOnly: false
+            httpOnly: true
         });
 
-        console.log(ctx.cookies.get());
+        console.log(ctx.cookies.get('token'));
         ctx.status = 200;
         ctx.message ="User created.";
     
@@ -144,9 +131,9 @@ async function register(ctx, next){
 }
 
 async function logout(ctx, next){
-    console.log(ctx.cookies.get());
+    console.log(ctx.cookies.get('token'));
     ctx.cookies.set('token', null);
-    ctx.status(200);
+    ctx.status = 200;
     ctx.message = "Logout success.";
 }
 
