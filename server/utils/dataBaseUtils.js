@@ -56,7 +56,7 @@ module.exports = {
 
     //find user
     findUser: function(data){
-        return UsersModel.findOne({username: {$regex: _.escapeRegExp(data.username), $options: "i"}}).lean().exec();
+        return UsersModel.findOne({ email: data.email.toLowerCase() });
     },
 
     //create user

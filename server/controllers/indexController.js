@@ -6,7 +6,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { Strategy } = require('passport-jwt');
 
-
+const User = require('../models/user.model');
 
 async function listTodo(ctx, next){
     try{
@@ -98,7 +98,7 @@ async function login(ctx, next){
             ctx.message = "some error";
         }
 }
-
+/*
 async function register(ctx, next){
     try{
         let user = await db.findUser(ctx.request.body);
@@ -129,6 +129,9 @@ async function register(ctx, next){
         
     }
 }
+*/
+
+
 
 async function logout(ctx, next){
     console.log(ctx.cookies.get('token'));
@@ -137,4 +140,4 @@ async function logout(ctx, next){
     ctx.message = "Logout success.";
 }
 
-module.exports = { listTodo, createTodo, deleteTodo, updateTodo, checkLogin, login, register, logout};
+module.exports = { listTodo, createTodo, deleteTodo, updateTodo, checkLogin, login , logout};

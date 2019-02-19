@@ -20,13 +20,16 @@
     "jsonwebtoken": "^8.4.0",
     "koa": "^2.7.0",
     "koa-body": "^4.0.8",
+    "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
     "koa-logger": "^3.2.0",
+    "koa-passport": "^4.1.1",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.13",
     "nodemon": "^1.18.10",
     "passport": "^0.4.0",
+    "passport-custom": "^1.0.5",
     "passport-jwt": "^4.0.0"
   }
 }
