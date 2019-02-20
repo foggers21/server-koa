@@ -7,7 +7,7 @@ const logger = require('koa-logger');
 const mongoose = require('mongoose');
 const bodyParser = require('koa-bodyparser');
 
-const { auth } = require('./auth');
+
 
 const port = serverPort || process.env.PORT;
 
@@ -18,9 +18,7 @@ setUpConnection();
 mongoose.Promise = require('bluebird');
 mongoose.set('debug', true);
 
-
-
-//app.use(err);
+app.use(err);
 app.use(logger());
 app.use(bodyParser());
 app.use(auth());

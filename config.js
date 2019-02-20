@@ -3,10 +3,6 @@
 
 
 module.exports = {
-    jwtKey: {
-        //jwtFromRequest: ExtractJwt,
-       // secretOrKey: 'TfbTq2NfLzqMcbVY9EpGQ2p'
-    },
 
     serverPort: 3000,
 

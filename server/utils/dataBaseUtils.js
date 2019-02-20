@@ -14,16 +14,15 @@ module.exports = {
         mongoose.connect(db.url,{useNewUrlParser: true});
     },
     
-    listTodos:  function(user){
-        return  TodoModel.find({userId: user});
+    listTodos:  function(){
+        return  TodoModel.find({});
     },
 
-    createTodo: async function(data, userid){
+    createTodo: async function(data){
         
         return  TodoModel.create({
             title: data.title,
-            completed: false,
-            userId: userid
+            completed: false
         }); 
         
     },
@@ -51,20 +50,6 @@ module.exports = {
 
         return TodoModel.findByIdAndUpdate(id, updateData, (err) => {
             console.error("Error update:", err);
-        });
-    },
-
-    //find user
-    findUser: function(data){
-        return UsersModel.findOne({ email: data.email.toLowerCase() });
-    },
-
-    //create user
-    createUser: function(data){
-        
-        return UsersModel.create({
-            username: data.username,
-            password: data.password
         });
     }
 
