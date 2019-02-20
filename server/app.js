@@ -12,7 +12,6 @@ const bodyParser = require('koa-bodyparser');
 const port = serverPort || process.env.PORT;
 
 
-
 const { setUpConnection } = require('./utils/dataBaseUtils');
 setUpConnection();
 mongoose.Promise = require('bluebird');
@@ -21,7 +20,6 @@ mongoose.set('debug', true);
 app.use(err);
 app.use(logger());
 app.use(bodyParser());
-app.use(auth());
 app.use(routes());
 app.use(allowedMethods());
 

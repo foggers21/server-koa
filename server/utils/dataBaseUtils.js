@@ -1,13 +1,10 @@
 "use strict"
 
 const mongoose = require('mongoose');
-const _ = require('lodash');
-
 
 const { db } = require('../../config.js');
 
 const TodoModel = require('../models/todo.model.js');
-const UsersModel = require('../models/user.model');
 
 module.exports = {
     setUpConnection:  function() {
