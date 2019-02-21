@@ -28,6 +28,7 @@ module.exports = {
         return  TodoModel.findByIdAndDelete(id);
     },
 
+    
     updateTodo: async function(id, data){
 
         let todo = await TodoModel.findById(id);
