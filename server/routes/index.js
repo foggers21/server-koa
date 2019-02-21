@@ -11,6 +11,9 @@ const router = new Router();
         .post('/todos', KoaBody(),createTodo) //create todo
         .delete('/todos/:id', deleteTodo)            //delete todo
         .patch('/todos/:id',  KoaBody(), updateTodo) //update todo
+        .get('/', ctx => {
+            ctx.body = "Welcome on server for todo-app";
+        })
 
 
 
