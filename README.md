@@ -1,1 +1,1 @@
-# server-koa
+# server for todo-app by koa
