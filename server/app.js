@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 
 
-const port = serverPort || process.env.PORT;
+const port =  process.env.PORT;
 
 
 const { setUpConnection } = require('./utils/dataBaseUtils');
