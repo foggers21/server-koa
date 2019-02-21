@@ -13,11 +13,10 @@ async function listTodo(ctx, next){
 
 
 
-async function createTodo(ctx, next){
+async function createTodo(ctx){
     try{
         let data = await db.createTodo(ctx.request.body);
         ctx.response.body = data;
-        await next();
     }catch(e){
         console.error("error create: ", e);
     }
@@ -39,7 +38,7 @@ async function deleteTodo(ctx, next){
 
 async function updateTodo(ctx, next){
     try{
-        let data = await db.updateTodo(ctx.params,id, ctx.request.body);
+        let data = await db.updateTodo(ctx.params.id, ctx.request.body);
         ctx.response.body = data;
         await next();
     }catch(e){

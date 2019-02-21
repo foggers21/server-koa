@@ -5,7 +5,6 @@ const {routes, allowedMethods}  = require('./routes');
 const app = new Koa();
 const logger = require('koa-logger');
 const mongoose = require('mongoose');
-const bodyParser = require('koa-bodyparser');
 
 
 
@@ -19,7 +18,6 @@ mongoose.set('debug', true);
 
 app.use(err);
 app.use(logger());
-app.use(bodyParser());
 app.use(routes());
 app.use(allowedMethods());
 

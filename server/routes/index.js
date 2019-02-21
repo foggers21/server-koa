@@ -7,8 +7,8 @@ const { listTodo, createTodo, deleteTodo, updateTodo, } = require('../controller
 const router = new Router();
 
     router
-        .get('/todos/',  listTodo)              //get all todos for user
-        .post('/todos/', KoaBody(), createTodo) //create todo
+        .get('/todos',  listTodo)              //get all todos for user
+        .post('/todos', KoaBody(),createTodo) //create todo
         .delete('/todos/:id', deleteTodo)            //delete todo
         .patch('/todos/:id',  KoaBody(), updateTodo) //update todo
 

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const { db } = require('../../config.js');
 
-const TodoModel = require('../models/todo.model.js');
+const TodoModel = require('../models/todo.model');
 
 module.exports = {
     setUpConnection:  function() {
@@ -15,8 +15,8 @@ module.exports = {
         return  TodoModel.find({});
     },
 
-    createTodo: async function(data){
-        
+    createTodo: function(data){
+        console.log(data.title);
         return  TodoModel.create({
             title: data.title,
             completed: false
