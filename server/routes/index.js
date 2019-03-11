@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const KoaBody = require('koa-body');
-const { listTodo, createTodo, deleteTodo, updateTodo, } = require('../controllers/indexController');
+const { listTodo, createTodo, deleteTodo, updateTodo, createUser, login, checkLogin } = require('../controllers/indexController');
 
 
 
@@ -14,6 +14,11 @@ const router = new Router();
         .get('/', ctx => {
             ctx.body = "Welcome on server for todo-app";
         })
+
+        //auth requests
+        .post('/register', createUser)//register user
+        .post('/login',login)//login user
+        .get('/checkLogin', checkLogin);//checking if tonek is
 
 
 

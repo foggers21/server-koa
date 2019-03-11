@@ -3,6 +3,7 @@
 
 
 module.exports = {
+    jwtKey: "mWLATce4KUM7q4X5hLKCcGn",
 
     serverPort: 3000,
 
