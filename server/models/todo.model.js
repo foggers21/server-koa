@@ -7,6 +7,7 @@ const TodoSchema = new Schema({
     title: {type: String},
     completed: {type: Boolean},
     editing: {type: Boolean},
+    username: {type: String}
 },{
     versionKey: false,
     collection: "TodoCollection"

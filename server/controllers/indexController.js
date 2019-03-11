@@ -51,10 +51,10 @@ const jwtOptions = {
 
 
 
-
+//get all todos for user
 async function listTodo(ctx, next){
     try{
-        let data = await db.listTodos();
+        let data = await db.listTodos(ctx.params.user);
         ctx.response.body = data;
         await next();
     }catch(e){
@@ -64,10 +64,11 @@ async function listTodo(ctx, next){
 
 
 
-async function createTodo(ctx){
+async function createTodo(ctx, next){
     try{
-        let data = await db.createTodo(ctx.request.body);
+        let data = await db.createTodo(ctx.request.body, ctx.params.user);
         ctx.response.body = data;
+        await next();
     }catch(e){
         console.error("error create: ", e);
     }

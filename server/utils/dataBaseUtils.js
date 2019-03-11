@@ -11,15 +11,17 @@ module.exports = {
         mongoose.connect(db.url,{useNewUrlParser: true});
     },
     
-    listTodos:  function(){
-        return  TodoModel.find({});
+    listTodos:  function(user){
+        return  TodoModel.find({ username: user });
     },
 
-    createTodo: function(data){
+    createTodo: function(data, user){
         console.log(data.title);
+        
         return  TodoModel.create({
             title: data.title,
-            completed: false
+            completed: false,
+            username: user
         }); 
         
     },
