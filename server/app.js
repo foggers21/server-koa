@@ -6,9 +6,10 @@ const app = new Koa();
 const logger = require('koa-logger');
 const mongoose = require('mongoose');
 const passport = require('koa-passport');
+const bodyParser = require('koa-bodyparser');
 
 
-const port =  process.env.PORT;
+const port = 3000 || process.env.PORT;
 
 
 const { setUpConnection } = require('./utils/dataBaseUtils');
@@ -18,6 +19,7 @@ mongoose.set('debug', true);
 
 app.use(err);
 app.use(logger());
+app.use(bodyParser());
 app.use(passport.initialize());
 app.use(routes());
 app.use(allowedMethods());

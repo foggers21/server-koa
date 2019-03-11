@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local'); 
 const JwtStrategy = require('passport-jwt').Strategy; 
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const { ExtractJwt } = require('passport-jwt');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -22,6 +22,7 @@ passport.use(new LocalStrategy({
       if (!user || !user.checkPassword(password)) {
         return done(null, false, {message: 'User does not exist or wrong password.'});
       }
+      
       return done(null, user);
     });
   }
@@ -29,7 +30,7 @@ passport.use(new LocalStrategy({
 );
 
 const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeader(),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
     secretOrKey: jwtKey
   };
   
@@ -103,7 +104,7 @@ async function createUser(ctx, next){
     try {
       let userDb = await User.findOne({email: ctx.request.body.email});
       if(userDb != void(0)){
-       ctx.status = 400;
+       ctx.status = 401;
        ctx.message = "User already exist.";
       }else{
         await User.create(ctx.request.body);
@@ -117,7 +118,7 @@ async function createUser(ctx, next){
               displayName: user.displayName,
               email: user.email
             };
-            const token = jwt.sign(payload, jwtsecret); //JWT is created here
+            const token = jwt.sign(payload, jwtKey); //JWT is created here
       
             ctx.body = {user: user.displayName, token: 'JWT ' + token};
           }
@@ -163,4 +164,4 @@ async function checkLogin(ctx, next){
 
 
 
-module.exports = { listTodo, createTodo, deleteTodo, updateTodo, reateUser, login, checkLogin };
+module.exports = { listTodo, createTodo, deleteTodo, updateTodo, createUser, login, checkLogin };
