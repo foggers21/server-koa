@@ -1,4 +1,4 @@
-# server for todo-app by koa with JWT authorization
+# server for todo-app by koa with JWT authorization 
 
 Server is working on https://server-for-todo-by-koa.herokuapp.com/
 
