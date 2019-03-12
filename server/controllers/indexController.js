@@ -133,6 +133,7 @@ async function createUser(ctx, next){
 }
 
 async function login(ctx, next){
+  try{
     await passport.authenticate('local', function (err, user) {
       if (user == false) {
         ctx.body = "Your email or password is not correct";
@@ -143,11 +144,15 @@ async function login(ctx, next){
           displayName: user.displayName,
           email: user.email
         };
-        const token = jwt.sign(payload, jwtsecret); //JWT is created here
+        const token = jwt.sign(payload, jwtKey); //JWT is created here
   
         ctx.body = {user: user.displayName, token: 'JWT ' + token};
       }
     })(ctx, next);
+  }catch(e){
+    ctx.status = 402;
+    ctx.message = err;
+  }
 
 }
 
