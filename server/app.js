@@ -9,7 +9,7 @@ const passport = require('koa-passport');
 const bodyParser = require('koa-bodyparser');
 
 
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT;
 
 
 const { setUpConnection } = require('./utils/dataBaseUtils');
