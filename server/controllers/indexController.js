@@ -160,9 +160,9 @@ async function checkLogin(ctx, next){
     
     await passport.authenticate('jwt', function (err, user) {
       if (user) {
-        ctx.body = true;
+        ctx.body = { isLoggedIn: true };
       } else {
-        ctx.body = false;
+        ctx.body = { isLoggedIn: false };
         console.log("err", err)
       }
     } )(ctx, next)
