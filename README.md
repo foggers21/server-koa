@@ -1,8 +1,43 @@
-# server for todo-app by koa with JWT authorization 
+## koa-starter
 
-Server is working on https://server-for-todo-by-koa.herokuapp.com/
+### What includes:
 
-The same server by express(+ JWT authentication by cookie): https://github.com/vanyavasylyshyn/server
+* Multipy Koa-Routers using.
+* Flowtype.
+* Eslint.
+* Backpack.
 
-Server getting request from http://todo.taraschuiko.com.ua/
+### Usage
 
+### Routing:
+
+Create your router in src/routes file
+then import it in src/routes/index.js
+
+example:
+
+```js
+const newRouter = require('./newRouter');
+
+const routes = combineRouters([root, newRouter]);
+```
+
+### Commands:
+
+* Build:
+  ```bash
+  yarn build
+  ```
+* Dev server:
+
+  ```bash
+  yarn dev
+  ```
+
+* Start on your server:
+
+  ```bash
+  yarn start
+  ```
+
+### Its still in progress...
